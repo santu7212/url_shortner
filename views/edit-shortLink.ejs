@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="/edit_page.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <%- include('./partials/header.ejs') %>
+
+    <% if (user) { %>
+      <p class="login-status logged-in">
+        <i class="fa-solid fa-circle-check"></i> You are Logged In
+      </p>
+    <% } else { %>
+      <p class="login-status not-logged-in">
+        <i class="fa-solid fa-circle-exclamation"></i> You are not Logged In
+      </p>
+    <% } %>
+    
+    
+    <div class="container">
+      <h1>Edit URL</h1>
+      <form action="/" method="POST">
+        <div>
+          <label for="url">Enter URL</label>
+          <input type="url" name="url" id="url" value="<%= url %>" required />
+        </div>
+        <div>
+          <label for="shortCode">Enter short code</label>
+          <input type="text" name="shortCode" id="shortCode" value="<%= shortCode %>" required />
+        </div>
+
+          
+        <% if (errors && errors.length > 0) { %>
+          <% errors.forEach((error) => { %>
+              <p class="flash-error"><%= error %></p>
+          <% }) %>
+      <% } %>
+        
+        <button class="update" type="submit" value="update">Update</button>
+        
+      </form>
+
+     
+    <%- include("./partials/footer.ejs") %>
+    
+
+    <script>
+      function copyToClipboard(text) {
+        navigator.clipboard.writeText(text)
+          .then(() => alert("URL copied to clipboard!"))
+          .catch(err => console.error("Failed to copy:", err));
+      }
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,111 @@
+ <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <div class="logo">SantuaHub</div>
+        <nav>
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
+          <!-- <a href="/profile">Profile</a> -->
+          <!-- <a href="/logout">Logout</a> -->
+        </nav>
+      </div>
+    </header>
+
+    <div class="login-container">
+      <div class="login-form">
+        <h1>Welcome Back!</h1>
+
+        <form action="/login" method="POST">
+          <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" name="email" placeholder="Email" required />
+          </div>
+          
+          <div class="input-group password-wrapper">
+            <i class="fas fa-lock"></i>
+            <input type="password" name="password" id="password" placeholder="Password" required />
+            <button type="button" class="toggle-password" onclick="togglePassword()">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+          
+          <% if (errors && errors.length > 0) { %>
+            <% errors.forEach((error) => { %>
+              <div class="flash-error">
+                <i class="fas fa-exclamation-circle"></i>
+                <span><%= error %></span>
+              </div>
+            <% }) %>
+          <% } %>
+        
+          <button type="submit">Login</button>
+        </form>
+
+        <div class="forgot-password-link">
+          <a href="/reset-password">Forgot Password?</a>
+        </div>
+        
+        <p>Don't have an account? <a href="/register">Register</a></p>
+        
+        <div class="social-login">
+          <p>Or login with</p>
+          <div class="social-icons">
+            <!-- <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a> -->
+            <a href="/google" target="_blank"><i class="fab fa-google"></i></a>
+            <!-- <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a> -->
+            <a href="/github" target="_blank"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-left">
+          <p>&copy; <%= new Date().getFullYear() %> URL Shortener. Made with ❤️ by Santu</p>
+        </div>
+        <div class="footer-right">
+          <a href="https://www.linkedin.com" target="_blank" class="social-icon linkedin">
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+          <a href="https://www.facebook.com" target="_blank" class="social-icon facebook">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com" target="_blank" class="social-icon instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="https://twitter.com" target="_blank" class="social-icon twitter">
+            <i class="fa-brands fa-twitter"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      function togglePassword() {
+        const passwordInput = document.getElementById('password');
+        const toggleIcon = document.querySelector('.toggle-password i');
+        
+        if (passwordInput.type === 'password') {
+          passwordInput.type = 'text';
+          toggleIcon.classList.remove('fa-eye');
+          toggleIcon.classList.add('fa-eye-slash');
+        } else {
+          passwordInput.type = 'password';
+          toggleIcon.classList.remove('fa-eye-slash');
+          toggleIcon.classList.add('fa-eye');
+        }
+      }
+    </script>
+  </body>
+</html>

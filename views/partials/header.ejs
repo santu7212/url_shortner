@@ -1,0 +1,22 @@
+ <header class="header">
+  <div class="header-container">
+    <div class="left-section">
+      <h2 class="welcome-text">Welcome to URL Shortener</h2>
+    </div>
+    <div class="right-section">
+      <nav>
+        <a href="/" target="">Home</a>
+        <a href="/" target="_blank">About</a>
+        <a href="/" target="_blank">Contact</a>
+
+        <% if (!user) { %>
+          <a href="/login" target="_blank">Login</a>
+          <a href="/register" target="_blank">Register</a>
+        <% } else { %>
+          <a href="/profile" target="">Profile</a>
+          <a href="/logout" target="_blank">Logout</a>
+        <% } %>
+      </nav>
+    </div>
+  </div>
+</header>

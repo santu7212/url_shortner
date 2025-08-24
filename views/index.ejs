@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <%- include('./partials/header.ejs') %> <% if (user) { %>
+    <p class="login-status logged-in">
+      <i class="fa-solid fa-circle-check"></i> You are Logged In
+    </p>
+    <% } else { %>
+    <p class="login-status not-logged-in">
+      <i class="fa-solid fa-circle-exclamation"></i> You are not Logged In
+    </p>
+    <% } %>
+
+    <div class="container">
+      <h1>URL Shortener</h1>
+      <form action="/" method="POST">
+        <div>
+          <label for="url">Enter URL</label>
+          <input type="url" name="url" id="url" required />
+        </div>
+        <div>
+          <label for="shortCode">Enter short code</label>
+          <input type="text" name="shortCode" id="shortCode" required />
+        </div>
+
+        <% if (errors && errors.length > 0) { %> <% errors.forEach((error) => {
+        %>
+        <p class="flash-error"><%= error %></p>
+        <% }) %> <% } %>
+
+        <button type="submit">Shorten</button>
+      </form>
+
+      <h2>Shortened URLs</h2>
+      <ul>
+        <% links.map(({ shortCode, url,id }) => { %> <% const truncatedUrl =
+        url.length >= 30 ? `${url.slice(0, 30)}...` : url %>
+        <li>
+          <div class="url-wrapper">
+            <a class="short-url" href="/<%= shortCode %>" target="_blank">
+              <%= host %>/<%= shortCode %>
+            </a>
+            <button
+              class="copy-btn"
+              onclick="copyToClipboard('<%= host %>/<%= shortCode %>')"
+            >
+              <i class="fa-solid fa-copy"></i>
+            </button>
+
+            <button class="edit-btn">
+              <a href="/edit/<%= id %>">
+                <i class="fa-solid fa-edit"></i>
+              </a>
+            </button>
+
+            <form action="/delete/<%= id %>" method="post">
+              <button class="delete-btn">
+                <i class="fa-solid fa-trash"></i>
+
+              </button>
+            </form>
+          </div>
+          <p class="original-url"><%= truncatedUrl %></p>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
+
+
+
+    <% if (totalPages > 1) { %>
+  <div class="pagination">
+
+    <%# Previous page link %>
+    <% if (currentPage > 1) { %>
+      <a href="?page=<%= currentPage - 1 %>" class="page-link">&laquo; Previous</a>
+    <% } else { %>
+      <span class="page-link disabled">&laquo; Previous</span>
+    <% } %>
+
+     
+
+
+<%
+
+    let startPage = Math.max(1, currentPage - 2);
+let endPage = Math.min(totalPages, currentPage + 2);
+
+while (endPage - startPage < 4 && startPage > 1) {
+  startPage--;
+}
+while (endPage - startPage < 4 && endPage < totalPages) {
+  endPage++;
+}
+ 
+
+%>
+
+
+<%
+// Always show first pge
+if (startPage > 1) { %>
+<a href="?page=1" class="page-link">1</a>
+<% if (startPage > 2) { %>
+<span class="ellipsis">... </span>
+<% } %>
+<% } %>
+
+<%# Show page numbers around current page %>
+<% for (let i = startPage; i <= endPage; i++) { %>
+<% if (i === currentPage) { %>
+<span class="page-link current"><%= i %></span>
+<% } else { %>
+<a href="?page=<%= i %>" class="page-link"><%= i %></a>
+<% } %>
+
+<% } %>
+
+
+
+<% if (endPage < totalPages) { %>
+    <% if (endPage < totalPages - 1) { %>
+        <span class="ellipsis"> ... </span>
+    <%} %>
+    <a href="?page=<%= totalPages %>" class="page-link"><%= totalPages %></a>
+<% } %>
+
+<%# Next page link %>
+
+
+    
+
+
+
+    <%# Next page link %>
+    <% if (currentPage < totalPages) { %>
+      <a href="?page=<%= currentPage + 1 %>" class="page-link">Next &raquo;</a>
+    <% } else { %>
+      <span class="page-link disabled">Next &raquo;</span>
+    <% } %>
+
+  </div>
+<% } %>
+
+
+
+    <%- include("./partials/footer.ejs") %>
+    <script>
+      function copyToClipboard(text) {
+        navigator.clipboard
+          .writeText(text)
+          .then(() => alert("URL copied to clipboard!"))
+          .catch((err) => console.error("Failed to copy:", err));
+      }
+    </script>
+  </body>
+</html>

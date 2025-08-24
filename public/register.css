@@ -1,0 +1,225 @@
+ /* General Page Styling */
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: url("/images/background.jpg") no-repeat center center/cover;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    padding-top: 80px; /* Increased padding to account for the taller header */
+}
+
+/* Navbar styles */
+.header {
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 20px 30px; /* Increased padding for more height */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-section .welcome-text {
+    margin: 0;
+    font-size: 1.7em; /* Slightly larger text for better visual balance */
+}
+
+.right-section nav {
+    display: flex;
+    gap: 18px;
+}
+
+.right-section nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 10px 14px; /* Slightly bigger padding inside nav links */
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.right-section nav a:hover {
+    background-color: #f39c12;
+    color: #333;
+}
+
+/* Register Container */
+.register-container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 35px 30px;
+    border-radius: 12px;
+    box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.25);
+    width: 370px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+    margin-top: 120px; /* Adjusted for taller header */
+}
+
+/* Register Form */
+.register-form h1 {
+    color: #007bff;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+/* Form Inputs */
+.register-form input {
+    width: 100%;
+    padding: 12px 14px;
+    margin: 10px 0;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Focus state */
+.register-form input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+}
+
+/* Submit Button */
+.register-form button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s ease;
+}
+
+.register-form button:hover {
+    background: linear-gradient(45deg, #0056b3, #003f7f);
+    transform: translateY(-1px);
+    box-shadow: 0px 5px 15px rgba(0, 123, 255, 0.3);
+}
+
+/* Flash Error */
+.flash-error {
+    color: #fff;
+    background-color: #e74c3c;
+    font-size: 14px;
+    padding: 12px;
+    margin-top: 14px;
+    border-left: 5px solid #c0392b;
+    border-radius: 6px;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Bottom Text */
+.register-form p {
+    margin-top: 12px;
+    font-size: 0.9em;
+}
+
+.register-form p a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-form p a:hover {
+    text-decoration: underline;
+}
+
+/* Icon Styling */
+.register-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .register-container {
+        width: 90%;
+        padding: 25px;
+    }
+}
+
+/* Footer */
+.footer {
+    background-color: #2c3e50;
+    color: white;
+    padding: 10px 0; /* Reduced padding for a shorter footer */
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: auto;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer-left p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.footer-right {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon {
+    font-size: 1.6rem;
+    transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: scale(1.2);
+}
+
+.social-icon.linkedin i {
+    color: #0077b5;
+}
+
+.social-icon.facebook i {
+    color: #1877f2;
+}
+
+.social-icon.instagram i {
+    color: #e1306c;
+}
+
+.social-icon.twitter i {
+    color: #1da1f2;
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+}
